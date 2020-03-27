@@ -1,0 +1,39 @@
+# depslib dependency file v1.0
+1585272366 source:c:\dev\exercicios_rafa\arquitetura\mips32-decode\teste.c
+
+1585272408 c:\dev\exercicios_rafa\arquitetura\mips32-decode\teste.h
+
+1585312481 source:c:\dev\exercicios_rafa\arquitetura\mips32-decode\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"decodificador.h"
+
+1585272366 c:\dev\exercicios_rafa\arquitetura\mips32-decode\teste.c
+
+1585308025 c:\dev\exercicios_rafa\arquitetura\mips32-decode\decodificador.h
+
+1585312469 source:c:\dev\exercicios_rafa\arquitetura\mips32-decode\decodificador.c
+	<stdio.h>
+	<string.h>
+	"decodificador.h"
+
+1585353250 source:c:\dev\rafa\mips32-decoder\apoio.c
+	"apoio.h"
+
+1585353158 c:\dev\rafa\mips32-decoder\apoio.h
+
+1585353294 source:c:\dev\rafa\mips32-decoder\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"decodificador.h"
+
+1585351020 c:\dev\rafa\mips32-decoder\decodificador.h
+
+1585352504 source:c:\dev\rafa\mips32-decoder\decodificador.c
+	<stdio.h>
+	<string.h>
+	"decodificador.h"
+	"apoio.h"
+
