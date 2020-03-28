@@ -33,20 +33,18 @@ struct Comandos {
 struct Comandos comandos;
 
 // transforma um numero decimal em binario
-void binario(int valor, int* vetor);
+void binario(int valor, int vetor[8]);
 
 // trunca o valor binario normal para caber em 5 posicoes
-void binario5(int* valor, int* vetor);
+void binario5(int valor, int vetor[5]);
 
 // calcula o valor binario (truncado em 5) para o registrador
-void registrador(char* valor, int* vetor);
+void registrador(char* valor, int vetor[5]);
 
 // calcula o valor binario para a constante imediata
-void immediate(char* valor, int* vetor);
+void immediate(char* valor, int vetor[16]);
 
 // calcula o valor binario para a constante imediata
-void jump(char* valor, int* vetor);
-
-void shift(char* valor, int* retorno);
+void jump(char* valor, int vetor[26]);
 
 #endif // APOIO_H_INCLUDED

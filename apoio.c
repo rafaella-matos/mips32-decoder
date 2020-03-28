@@ -1,3 +1,5 @@
+#include <string.h>
+#include <stdlib.h>
 #include "apoio.h"
 
 struct Comandos comandos = {
@@ -26,7 +28,7 @@ struct Comandos comandos = {
 };
 
 // transforma um numero decimal em binario
-void binario(int valor, int* retorno)
+void binario(int valor, int retorno[8])
 {
     int i;
     for(i = 7; i >= 0; i--)
@@ -39,7 +41,7 @@ void binario(int valor, int* retorno)
 }
 
 // trunca o valor binario normal para caber em 5 posicoes
-void binario5(int* valor, int* retorno)
+void binario5(int valor, int retorno[5])
 {
     int bin[8];
     binario(valor, bin);
@@ -48,7 +50,7 @@ void binario5(int* valor, int* retorno)
     for(i = 3; i < 8; i++) retorno[i - 3] = bin[i];
 }
 // calcula o valor binario (truncado em 5) para o registrador
-void registrador(char* valor, int* retorno)
+void registrador(char* valor, int retorno[5])
 {
     if (strcmp(valor, "$zero") == 0) binario5(0, retorno);
 
@@ -84,7 +86,7 @@ void registrador(char* valor, int* retorno)
 }
 
 // calcula o valor binario para a constante imediata
-void immediate(char* valor, int* retorno)
+void immediate(char* valor, int retorno[16])
 {
     // transforma o valor "string" em um numero (short)
     char* pEnd;
@@ -97,12 +99,10 @@ void immediate(char* valor, int* retorno)
     // converte posicao a posicao a string binaria em um array de inteiro
     int i;
     for(i = 0; i < 16; i++) retorno[i] = binarioTemp[i] - 48;
-
-    printf("\nSaida de immediate: "); for(i = 0; i < 16; i++) printf("%d", retorno[i]);
 }
 
 // calcula o valor binario para a constante imediata
-void jump(char* valor, int* retorno)
+void jump(char* valor, int retorno[26])
 {
     // transforma o valor "string" em um numero (short)
     char* pEnd;
@@ -116,14 +116,4 @@ void jump(char* valor, int* retorno)
     // converte posicao a posicao a string binaria em um array de inteiro
     int i;
     for(i = 0; i < 26; i++) retorno[i] = binarioTemp[i] - 48;
-}
-
-// calcula o valor binario para a shift
-void shift(char* valor, int* retorno)
-{
-    int temp[16];
-    immediate(valor, temp);
-
-    int i;
-    for(i = 11; i < 16; i++) retorno[i-11] = temp[i];
 }

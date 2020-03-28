@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "decodificador.h"
 #include "apoio.h"
 
@@ -52,9 +53,12 @@ assembly decodificar(char* linha)
     if (linha[0] == 'l' && linha[1] == 'w') return _lw(linha);
 
     printf("Oops, comando invalido!");
+
+    assembly x = { };
+    return x;
 }
 
-assembly _comando_r(int* opcode, int* shamt, int* funct, int* rd, int* rs, int* rt, char* linha)
+assembly _comando_r(int opcode[6], int shamt[5], int funct[6], int rd[5], int rs[5], int rt[5], char* linha)
 {
     assembly retorno;
     retorno.tipo = 'R';
@@ -98,7 +102,7 @@ assembly _comando_r(int* opcode, int* shamt, int* funct, int* rd, int* rs, int* 
     return retorno;
 }
 
-assembly _comando_i(int* opcode, int* funct, int* rs, int* rt, int* imm, char* linha)
+assembly _comando_i(int opcode[6], int funct[6], int rs[5], int rt[5], int imm[16], char* linha)
 {
     assembly retorno;
     retorno.tipo = 'R';
@@ -133,7 +137,7 @@ assembly _comando_i(int* opcode, int* funct, int* rs, int* rt, int* imm, char* l
     return retorno;
 }
 
-assembly _comando_j(int* opcode, int* jump, char* linha)
+assembly _comando_j(int opcode[6], int jump[26], char* linha)
 {
     assembly retorno;
     retorno.tipo = 'J';
@@ -525,7 +529,7 @@ assembly _sll(char* linha)
     }
     temp[length] = 0;
 
-    int rs[5] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+    int rs[5] = { 0, 0, 0, 0, 0 };
 
     int rd[5];
     registrador(strtok(temp, ","), rd);
@@ -534,9 +538,7 @@ assembly _sll(char* linha)
     registrador(strtok(NULL, ","), rt);
 
     int sa[5];
-    char* token = strtok(NULL, ",");
-    int temp_sa = atoi(token);
-    binario5(temp_sa, sa);
+    binario5(atoi(strtok(NULL, ",")), sa);
 
     assembly retorno = _comando_r(comandos.sll.opcode, sa, comandos.sll.funct, rd, rs, rt, linha);
 
@@ -568,7 +570,7 @@ assembly _srl(char* linha)
     registrador(strtok(NULL, ","), rt);
 
     int sa[5];
-    binario5(strtok(NULL, ","), sa);
+    binario5(atoi(strtok(NULL, ",")), sa);
 
     assembly retorno = _comando_r(comandos.srl.opcode, sa, comandos.srl.funct, rd, rs, rt, linha);
 
