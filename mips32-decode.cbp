@@ -39,6 +39,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="decodificador.h" />
+		<Unit filename="decodificador_r.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="decodificador_r.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
