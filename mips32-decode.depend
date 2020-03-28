@@ -18,20 +18,20 @@
 	<string.h>
 	"decodificador.h"
 
-1585357819 source:c:\dev\rafa\mips32-decoder\apoio.c
+1585362752 source:c:\dev\rafa\mips32-decoder\apoio.c
 	"apoio.h"
 
-1585357304 c:\dev\rafa\mips32-decoder\apoio.h
+1585358411 c:\dev\rafa\mips32-decoder\apoio.h
 
-1585357863 source:c:\dev\rafa\mips32-decoder\main.c
+1585362633 source:c:\dev\rafa\mips32-decoder\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"decodificador.h"
 
-1585351020 c:\dev\rafa\mips32-decoder\decodificador.h
+1585358380 c:\dev\rafa\mips32-decoder\decodificador.h
 
-1585357791 source:c:\dev\rafa\mips32-decoder\decodificador.c
+1585362735 source:c:\dev\rafa\mips32-decoder\decodificador.c
 	<stdio.h>
 	<string.h>
 	"decodificador.h"

@@ -27,7 +27,7 @@ int main()
     printf("\n");
     decodificar("xor $t0,$t1,$t2");
     printf("\n");
-    decodificar("sll $t0,$t2,31");
+    decodificar("sll $t0,$t1,31");
     printf("\n");
     decodificar("srl $t1,$t2,31");
     printf("\n");
@@ -35,19 +35,19 @@ int main()
     printf("\n");
     decodificar("mult $t1,$t2");
     printf("\n");
-    decodificar("beq $t1,$t2,offset");
+    decodificar("beq $t1,$t2,65535");
     printf("\n");
-    decodificar("bne rs,rt,offset");
+    decodificar("bne $t1,$t2,65535");
     printf("\n");
-    decodificar("j target");
+    decodificar("j 67108863");
     printf("\n");
-    decodificar("jal target");
+    decodificar("jal 67108863");
     printf("\n");
-    decodificar("jr rs");
+    decodificar("jr $t0");
     printf("\n");
-    decodificar("lw rt,offset(rs)");
+    decodificar("lw $t2,65535($t0)");
     printf("\n");
-    decodificar("sw rt,offset(rs)");
+    decodificar("sw $t2,65535($t0)");
     printf("\n");
     return 0;
 }

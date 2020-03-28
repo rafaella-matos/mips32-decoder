@@ -44,4 +44,9 @@ void registrador(char* valor, int* vetor);
 // calcula o valor binario para a constante imediata
 void immediate(char* valor, int* vetor);
 
+// calcula o valor binario para a constante imediata
+void jump(char* valor, int* vetor);
+
+void shift(char* valor, int* retorno);
+
 #endif // APOIO_H_INCLUDED

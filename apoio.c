@@ -88,7 +88,7 @@ void immediate(char* valor, int* retorno)
 {
     // transforma o valor "string" em um numero (short)
     char* pEnd;
-    unsigned short numero = (unsigned short)strtol(valor, &pEnd, 10);
+    long numero = strtol(valor, &pEnd, 10);
 
     // transforma o numero em string binario
     char binarioTemp[16];
@@ -96,7 +96,26 @@ void immediate(char* valor, int* retorno)
 
     // converte posicao a posicao a string binaria em um array de inteiro
     int i;
-    for(i = 0; i < 16; i++) retorno[i] = binarioTemp[1] - 48;
+    for(i = 0; i < 16; i++) retorno[i] = binarioTemp[i] - 48;
+
+    printf("\nSaida de immediate: "); for(i = 0; i < 16; i++) printf("%d", retorno[i]);
+}
+
+// calcula o valor binario para a constante imediata
+void jump(char* valor, int* retorno)
+{
+    // transforma o valor "string" em um numero (short)
+    char* pEnd;
+    long long numero = (long long)strtoul(valor, &pEnd, 10);
+
+    // transforma o numero em string binario
+    char binarioTemp[32];
+
+    lltoa(numero, binarioTemp, 2);
+
+    // converte posicao a posicao a string binaria em um array de inteiro
+    int i;
+    for(i = 0; i < 26; i++) retorno[i] = binarioTemp[i] - 48;
 }
 
 // calcula o valor binario para a shift

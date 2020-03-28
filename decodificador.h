@@ -9,6 +9,10 @@ typedef struct {
 
 assembly decodificar(char* linha);
 
+assembly _comando_r(int* opcode, int* shamt, int* funct, int* rd, int* rs, int* rt, char* linha);
+assembly _comando_i(int* opcode, int* funct, int* rs, int* rt, int* imm, char* linha);
+assembly _comando_j(int* opcode, int* jump, char* linha);
+
 assembly _add(char* linha);
 assembly _addi(char* linha);
 assembly _and(char* linha);
