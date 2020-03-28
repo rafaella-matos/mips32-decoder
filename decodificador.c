@@ -68,29 +68,32 @@ assembly _comando_r(int* opcode, int* shamt, int* funct, int* rd, int* rs, int* 
 
     // opcode
     for(i = 0; i < 6; i++) retorno.binario[padding + i] = opcode[i];
+    printf("\nopcode: ");for(i = 0; i<5;i++)printf("%d", opcode[i]);
     padding += 6;
 
     // rs
-    //int* binarioRs = binario5(rs);
-    for(i = 0; i < 5; i++) retorno.binario[padding + i] = rs[3 + i];
+    for(i = 0; i < 5; i++) retorno.binario[padding + i] = rs[i];
+    printf("\nrs: ");for(i = 0; i<5;i++)printf("%d", rs[i]);
     padding += 5;
 
     // rt
-    //int* binarioRt = binario5(rt);
-    for(i = 0; i < 5; i++) retorno.binario[padding + i] = rt[3 + i];
+    for(i = 0; i < 5; i++) retorno.binario[padding + i] = rt[i];
+    printf("\nrt: ");for(i = 0; i<5;i++)printf("%d", rt[i]);
     padding += 5;
 
     // rd
-    //int* binarioRd = binario5(rd);
-    for(i = 0; i < 5; i++) retorno.binario[padding + i] = rd[3 + i];
+    for(i = 0; i < 5; i++) retorno.binario[padding + i] = rd[i];
+    printf("\nrd: ");for(i = 0; i<5;i++)printf("%d", rd[i]);
     padding += 5;
 
     // shamt
     for(i = 0; i < 5; i++) retorno.binario[padding + i] = shamt[i];
+    printf("\nshamt: ");for(i = 0; i<5;i++)printf("%d", shamt[i]);
     padding += 5;
 
     // funct
     for(i = 0; i < 6; i++) retorno.binario[padding + i] = funct[i];
+    printf("\nfunct: ");for(i =0; i<5;i++)printf("%d", funct[i]);
 
     return retorno;
 }
@@ -109,21 +112,22 @@ assembly _comando_i(int* opcode, int* funct, int* rs, int* rt, int* imm, char* l
 
     // opcode
     for(i = 0; i < 6; i++) retorno.binario[padding + i] = opcode[i];
+    printf("\nopcode: ");for(i = 0; i<5;i++)printf("%d", opcode[i]);
     padding += 6;
 
     // rs
-    //int* binarioRs = binario5(rs);
-    for(i = 0; i < 5; i++) retorno.binario[padding + i] = rs[3 + i];
+    for(i = 0; i < 5; i++) retorno.binario[padding + i] = rs[i];
+    printf("\nrs: ");for(i = 0; i<5;i++)printf("%d", rs[i]);
     padding += 5;
 
     // rt
-    //int* binarioRt = binario5(rt);
-    for(i = 0; i < 5; i++) retorno.binario[padding + i] = rt[3 + i];
+    for(i = 0; i < 5; i++) retorno.binario[padding + i] = rt[i];
+    printf("\nrt: ");for(i = 0; i<5;i++)printf("%d", rt[i]);
     padding += 5;
 
     // imm
-    //int* binarioImm = immediate(imm);
     for(i = 0; i < 16; i++) retorno.binario[padding + i] = imm[i];
+    printf("\nimm: ");for(i = 0; i<16;i++)printf("%d", imm[i]);
     padding += 16;
 
     return retorno;
@@ -140,9 +144,15 @@ assembly _add(char* linha)
     }
     temp[length] = 0;
 
-    int* rd = registrador(strtok(temp, ","));
-    int* rs = registrador(strtok(NULL, ","));
-    int* rt = registrador(strtok(NULL, ","));
+    int rd[5];
+    registrador(strtok(temp, ","), rd);
+
+    int rs[5];
+    registrador(strtok(NULL, ","), rs);
+
+    int rt[5];
+    registrador(strtok(NULL, ","), rt);
+
     int shamt[5] = { 0, 0, 0, 0, 0 };
 
     assembly retorno = _comando_r(comandos.add.opcode, shamt, comandos.add.funct, rd, rs, rt, linha);
@@ -167,17 +177,14 @@ assembly _addi(char* linha)
     }
     temp[length] = 0;
 
-    int* rt = registrador(strtok(temp, ","));
-    int* rs = registrador(strtok(NULL, ","));
-    char* x = strtok(NULL, ",");
-    printf("\nimm:%s\nimm_bin:", x);
+    int rt[5];
+    registrador(strtok(temp, ","), rt);
 
-    printf("\nchamando");
-    int* imm = immediate(x);
-    printf("chamei");
+    int rs[5];
+    registrador(strtok(NULL, ","), rs);
 
-    for(i = 0; i < 16; i++) printf("%d", imm[i]);
-    printf("\n");
+    int imm[16];
+    immediate(strtok(NULL, ","), imm);
 
     assembly retorno = _comando_i(comandos.addi.opcode, comandos.addi.funct, rs, rt, imm, linha);
 
@@ -202,9 +209,15 @@ assembly _and(char* linha)
     }
     temp[length] = 0;
 
-    int* rd = registrador(strtok(temp, ","));
-    int* rs = registrador(strtok(NULL, ","));
-    int* rt = registrador(strtok(NULL, ","));
+    int rd[5];
+    registrador(strtok(temp, ","), rd);
+
+    int rs[5];
+    registrador(strtok(NULL, ","), rs);
+
+    int rt[5];
+    registrador(strtok(NULL, ","), rt);
+
     int shamt[5] = { 0, 0, 0, 0, 0 };
 
     assembly retorno = _comando_r(comandos.and.opcode, shamt, comandos.and.funct, rd, rs, rt, linha);
@@ -228,13 +241,14 @@ assembly _andi(char* linha)
     }
     temp[length] = 0;
 
-    int* rt = registrador(strtok(temp, ","));
-    int* rs = registrador(strtok(NULL, ","));
-    char* x = strtok(NULL, ",");
-    printf("\nimm:%s\nimm_bin:", x);
-    unsigned int* imm = immediate(x);
-    for(i = 0; i < 16; i++) printf("%d", imm[i]);
-    printf("\n");
+    int rt[5];
+    registrador(strtok(temp, ","), rt);
+
+    int rs[5];
+    registrador(strtok(NULL, ","), rs);
+
+    int imm[5];
+    immediate(strtok(NULL, ","), imm);
 
     assembly retorno = _comando_i(comandos.andi.opcode, comandos.andi.funct, rs, rt, imm, linha);
 
@@ -259,9 +273,15 @@ assembly _nor(char* linha)
     }
     temp[length] = 0;
 
-    int* rd = registrador(strtok(temp, ","));
-    int* rs = registrador(strtok(NULL, ","));
-    int* rt = registrador(strtok(NULL, ","));
+    int rd[5];
+    registrador(strtok(temp, ","), rd);
+
+    int rs[5];
+    registrador(strtok(NULL, ","), rs);
+
+    int rt[5];
+    registrador(strtok(NULL, ","), rt);
+
     int shamt[5] = { 0, 0, 0, 0, 0 };
 
     assembly retorno = _comando_r(comandos.nor.opcode, shamt, comandos.nor.funct, rd, rs, rt, linha);
@@ -286,9 +306,15 @@ assembly _or(char* linha)
     }
     temp[length] = 0;
 
-    int* rd = registrador(strtok(temp, ","));
-    int* rs = registrador(strtok(NULL, ","));
-    int* rt = registrador(strtok(NULL, ","));
+    int rd[5];
+    registrador(strtok(temp, ","), rd);
+
+    int rs[5];
+    registrador(strtok(NULL, ","), rs);
+
+    int rt[5];
+    registrador(strtok(NULL, ","), rt);
+
     int shamt[5] = { 0, 0, 0, 0, 0 };
 
     assembly retorno = _comando_r(comandos.or.opcode, shamt, comandos.or.funct, rd, rs, rt, linha);
@@ -312,13 +338,14 @@ assembly _ori(char* linha)
     }
     temp[length] = 0;
 
-    int* rt = registrador(strtok(temp, ","));
-    int* rs = registrador(strtok(NULL, ","));
-    char* x = strtok(NULL, ",");
-    printf("\nimm:%s\nimm_bin:", x);
-    int* imm = immediate(x);
-    for(i = 0; i < 16; i++) printf("%d", imm[i]);
-    printf("\n");
+    int rt[5];
+    registrador(strtok(temp, ","), rt);
+
+    int rs[5];
+    registrador(strtok(NULL, ","), rs);
+
+    int imm[16];
+    immediate(strtok(NULL, ","), imm);
 
     assembly retorno = _comando_i(comandos.ori.opcode, comandos.ori.funct, rs, rt, imm, linha);
 
@@ -343,9 +370,15 @@ assembly _slt(char* linha)
     }
     temp[length] = 0;
 
-    int* rd = registrador(strtok(temp, ","));
-    int* rs = registrador(strtok(NULL, ","));
-    int* rt = registrador(strtok(NULL, ","));
+    int rd[5];
+    registrador(strtok(temp, ","), rd);
+
+    int rs[5];
+    registrador(strtok(NULL, ","), rs);
+
+    int rt[5];
+    registrador(strtok(NULL, ","), rt);
+
     int shamt[5] = { 0, 0, 0, 0, 0 };
 
     assembly retorno = _comando_r(comandos.slt.opcode, shamt, comandos.slt.funct, rd, rs, rt, linha);
@@ -369,13 +402,14 @@ assembly _slti(char* linha)
     }
     temp[length] = 0;
 
-    int* rt = registrador(strtok(temp, ","));
-    int* rs = registrador(strtok(NULL, ","));
-    char* x = strtok(NULL, ",");
-    printf("\nimm:%s\nimm_bin:", x);
-    int* imm = immediate(x);
-    for(i = 0; i < 16; i++) printf("%d", imm[i]);
-    printf("\n");
+    int rt[5];
+    registrador(strtok(temp, ","), rt);
+
+    int rs[5];
+    registrador(strtok(NULL, ","), rs);
+
+    int imm[16];
+    immediate(strtok(NULL, ","), imm);
 
     assembly retorno = _comando_i(comandos.slti.opcode, comandos.slti.funct, rs, rt, imm, linha);
 
@@ -400,9 +434,15 @@ assembly _sub(char* linha)
     }
     temp[length] = 0;
 
-    int* rd = registrador(strtok(temp, ","));
-    int* rs = registrador(strtok(NULL, ","));
-    int* rt = registrador(strtok(NULL, ","));
+    int rd[5];
+    registrador(strtok(temp, ","), rd);
+
+    int rs[5];
+    registrador(strtok(NULL, ","), rs);
+
+    int rt[5];
+    registrador(strtok(NULL, ","), rt);
+
     int shamt[5] = { 0, 0, 0, 0, 0 };
 
     assembly retorno = _comando_r(comandos.sub.opcode, shamt, comandos.sub.funct, rd, rs, rt, linha);
@@ -427,9 +467,15 @@ assembly _xor(char* linha)
     }
     temp[length] = 0;
 
-    int* rd = registrador(strtok(temp, ","));
-    int* rs = registrador(strtok(NULL, ","));
-    int* rt = registrador(strtok(NULL, ","));
+    int rd[5];
+    registrador(strtok(temp, ","), rd);
+
+    int rs[5];
+    registrador(strtok(NULL, ","), rs);
+
+    int rt[5];
+    registrador(strtok(NULL, ","), rt);
+
     int shamt[5] = { 0, 0, 0, 0, 0 };
 
     assembly retorno = _comando_r(comandos.xor.opcode, shamt, comandos.xor.funct, rd, rs, rt, linha);
@@ -454,10 +500,16 @@ assembly _sll(char* linha)
     }
     temp[length] = 0;
 
-    int* rd = registrador(strtok(temp, ","));
-    int* rs = registrador(strtok(NULL, ","));
-    int* rt = registrador(strtok(NULL, ","));
-    int* sa = binario5(strtok(NULL, ","));
+    int rd[5];
+    registrador(strtok(temp, ","), rd);
+
+    int rs[5] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+
+    int rt[5];
+    registrador(strtok(NULL, ","), rt);
+
+    int sa[5];
+    shift(strtok(NULL, ","), sa);
 
     assembly retorno = _comando_r(comandos.sll.opcode, sa, comandos.sll.funct, rd, rs, rt, linha);
 
@@ -480,10 +532,16 @@ assembly _srl(char* linha)
     }
     temp[length] = 0;
 
-    int* rd = registrador(strtok(temp, ","));
-    int* rs = registrador(strtok(NULL, ","));
-    int* rt = registrador(strtok(NULL, ","));
-    int* sa = binario5(strtok(NULL, ","));
+    int rs[5] = { 0, 0, 0, 0, 0 };
+
+    int rd[5];
+    registrador(strtok(temp, ","), rd);
+
+    int rt[5];
+    registrador(strtok(NULL, ","), rt);
+
+    int sa[5];
+    binario5(strtok(NULL, ","), sa);
 
     assembly retorno = _comando_r(comandos.srl.opcode, sa, comandos.srl.funct, rd, rs, rt, linha);
 
@@ -507,9 +565,15 @@ assembly _div(char* linha)
     }
     temp[length] = 0;
 
-    int* rd = registrador(strtok(temp, ","));
-    int* rs = registrador(strtok(NULL, ","));
-    int* rt = registrador(strtok(NULL, ","));
+    int rd[5];
+    registrador(strtok(temp, ","), rd);
+
+    int rs[5];
+    registrador(strtok(NULL, ","), rs);
+
+    int rt[5];
+    registrador(strtok(NULL, ","), rt);
+
     int shamt[10] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
     assembly retorno = _comando_r(comandos.div.opcode, shamt, comandos.div.funct, rd, rs, rt, linha);
@@ -534,9 +598,15 @@ assembly _mult(char* linha)
     }
     temp[length] = 0;
 
-    int* rd = registrador(strtok(temp, ","));
-    int* rs = registrador(strtok(NULL, ","));
-    int* rt = registrador(strtok(NULL, ","));
+    int rd[5];
+    registrador(strtok(temp, ","), rd);
+
+    int rs[5];
+    registrador(strtok(NULL, ","), rs);
+
+    int rt[5];
+    registrador(strtok(NULL, ","), rt);
+
     int shamt[10] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
     assembly retorno = _comando_r(comandos.div.opcode, shamt, comandos.div.funct, rd, rs, rt, linha);

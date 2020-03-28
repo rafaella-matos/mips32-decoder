@@ -6,7 +6,7 @@ typedef struct {
     int funct[6];
 } comando;
 
-typedef struct {
+struct Comandos {
     comando add   ;
     comando addi  ;
     comando and   ;
@@ -29,20 +29,19 @@ typedef struct {
     comando jr    ;
     comando lw    ;
     comando sw    ;
-} containerComandos;
-
-static const containerComandos comandos;
+};
+struct Comandos comandos;
 
 // transforma um numero decimal em binario
-int* binario(int valor);
+void binario(int valor, int* vetor);
 
 // trunca o valor binario normal para caber em 5 posicoes
-int* binario5(int* valor);
+void binario5(int* valor, int* vetor);
 
 // calcula o valor binario (truncado em 5) para o registrador
-int* registrador(char* valor);
+void registrador(char* valor, int* vetor);
 
 // calcula o valor binario para a constante imediata
-int* immediate(unsigned short valor);
+void immediate(char* valor, int* vetor);
 
 #endif // APOIO_H_INCLUDED

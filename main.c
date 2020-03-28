@@ -5,41 +5,37 @@
 
 int main()
 {
-    int* temp = immediate((unsigned short)65535);
-    int i;
-    for(i = 0; i < 16; i++) printf("%d",temp[i]);
-
-    //decodificar("add $t0,$t2,$t3");
-    //printf("\n");
-    //decodificar("addi $t1,$t4,65535");
-    /*printf("\n");
-    decodificar("and rd,rs,rt");
+    decodificar("add $t0,$t2,$t3");
     printf("\n");
-    decodificar("andi rt,rs,imm");
+    decodificar("addi $t1,$t4,65535");
     printf("\n");
-    decodificar("nor rd,rs,rt");
+    decodificar("and $t0,$t1,$t2");
     printf("\n");
-    decodificar("or rd,rs,rt");
+    decodificar("andi $t2,$t1,65535");
     printf("\n");
-    decodificar("ori rt,rs,imm");
+    decodificar("nor $t0,$t1,$t2");
     printf("\n");
-    decodificar("slt rd,rs,rt");
+    decodificar("or $t0,$t1,$t2");
     printf("\n");
-    decodificar("slti rt,rs,imm");
+    decodificar("ori $t2,$t1,65535");
     printf("\n");
-    decodificar("sub rd,rs,rt");
+    decodificar("slt $t0,$t1,$t2");
     printf("\n");
-    decodificar("xor rd,rs,rt");
+    decodificar("slti $t2,$t1,65535");
     printf("\n");
-    decodificar("sll rd,rt,sa");
+    decodificar("sub $t0,$t1,$t2");
     printf("\n");
-    decodificar("srl rs,rt,sa");
+    decodificar("xor $t0,$t1,$t2");
     printf("\n");
-    decodificar("div rs,rt");
+    decodificar("sll $t0,$t2,31");
     printf("\n");
-    decodificar("mult rs,rt");
+    decodificar("srl $t1,$t2,31");
     printf("\n");
-    decodificar("beq rs,rt,offset");
+    decodificar("div $t1,$t2");
+    printf("\n");
+    decodificar("mult $t1,$t2");
+    printf("\n");
+    decodificar("beq $t1,$t2,offset");
     printf("\n");
     decodificar("bne rs,rt,offset");
     printf("\n");
@@ -51,7 +47,7 @@ int main()
     printf("\n");
     decodificar("lw rt,offset(rs)");
     printf("\n");
-    decodificar("sw rt,offset(rs)");*/
+    decodificar("sw rt,offset(rs)");
     printf("\n");
     return 0;
 }

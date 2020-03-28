@@ -1,34 +1,33 @@
 #include "apoio.h"
 
-static const containerComandos comandos = {
-    { { 0, 0, 0, 0, 0, 0 }, { 1, 0, 0, 0, 0, 0 } },
-    { { 0, 0, 1, 0, 0, 0 } },
-    { { 0, 0, 0, 0, 0, 0 }, { 1, 0, 0, 1, 0, 0 } },
-    { { 0, 0, 1, 1, 0, 0 } },
-    { { 0, 0, 0, 0, 0, 0 }, { 1, 0, 0, 1, 1, 1 } },
-    { { 0, 0, 0, 0, 0, 0 }, { 1, 0, 0, 1, 0, 1 } },
-    { { 0, 0, 1, 1, 0, 1 } },
-    { { 0, 0, 0, 0, 0, 0 }, { 1, 0, 1, 0, 1, 0 } },
-    { { 0, 0, 1, 0, 1, 0 } },
-    { { 0, 0, 0, 0, 0, 0 }, { 1, 0, 0, 0, 1, 0 } },
-    { { 0, 0, 0, 0, 0, 0 }, { 1, 0, 0, 1, 1, 0 } },
-    { { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 } },
-    { { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 1, 0 } },
-    { { 0, 0, 0, 0, 0, 0 }, { 0, 1, 1, 0, 1, 0 } },
-    { { 0, 0, 0, 0, 0, 0 }, { 0, 1, 1, 0, 0, 0 } },
-    { { 0, 0, 0, 1, 0, 0 } },
-    { { 0, 0, 0, 1, 0, 1 } },
-    { { 0, 0, 0, 0, 1, 0 } },
-    { { 0, 0, 0, 0, 1, 1 } },
-    { { 0, 0, 0, 0, 0, 0 }, { 0, 0, 1, 0, 0, 0 } },
-    { { 1, 0, 0, 0, 1, 1 } },
-    { { 1, 0, 1, 0, 1, 1 } },
+struct Comandos comandos = {
+    { { 0, 0, 0, 0, 0, 0 }, { 1, 0, 0, 0, 0, 0 } }, // add
+    { { 0, 0, 1, 0, 0, 0 }, { } }, // addi
+    { { 0, 0, 0, 0, 0, 0 }, { 1, 0, 0, 1, 0, 0 } }, // and
+    { { 0, 0, 1, 1, 0, 0 }, { } }, // andi
+    { { 0, 0, 0, 0, 0, 0 }, { 1, 0, 0, 1, 1, 1 } }, // nor
+    { { 0, 0, 0, 0, 0, 0 }, { 1, 0, 0, 1, 0, 1 } }, // or
+    { { 0, 0, 1, 1, 0, 1 }, { } }, // ori
+    { { 0, 0, 0, 0, 0, 0 }, { 1, 0, 1, 0, 1, 0 } }, // slt
+    { { 0, 0, 1, 0, 1, 0 }, { } }, // slti
+    { { 0, 0, 0, 0, 0, 0 }, { 1, 0, 0, 0, 1, 0 } }, // sub
+    { { 0, 0, 0, 0, 0, 0 }, { 1, 0, 0, 1, 1, 0 } }, // xor
+    { { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 } }, // sll
+    { { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 1, 0 } }, // srl
+    { { 0, 0, 0, 0, 0, 0 }, { 0, 1, 1, 0, 1, 0 } }, // div
+    { { 0, 0, 0, 0, 0, 0 }, { 0, 1, 1, 0, 0, 0 } }, // mult
+    { { 0, 0, 0, 1, 0, 0 }, { } }, // beq
+    { { 0, 0, 0, 1, 0, 1 }, { } }, // bne
+    { { 0, 0, 0, 0, 1, 0 }, { } }, // j
+    { { 0, 0, 0, 0, 1, 1 }, { } }, // jal
+    { { 0, 0, 0, 0, 0, 0 }, { 0, 0, 1, 0, 0, 0 } }, // jr
+    { { 1, 0, 0, 0, 1, 1 }, { } }, // lw
+    { { 1, 0, 1, 0, 1, 1 }, { } }, // sw
 };
 
 // transforma um numero decimal em binario
-int* binario(int valor)
+void binario(int valor, int* retorno)
 {
-    static int retorno[8];
     int i;
     for(i = 7; i >= 0; i--)
     {
@@ -37,69 +36,75 @@ int* binario(int valor)
 
         valor = valor / 2;
     }
-
-    return retorno;
 }
 
 // trunca o valor binario normal para caber em 5 posicoes
-int* binario5(int* valor)
+void binario5(int* valor, int* retorno)
 {
-    int* bin = binario(valor);
+    int bin[8];
+    binario(valor, bin);
 
-    static int retorno[5];
     int i;
     for(i = 3; i < 8; i++) retorno[i - 3] = bin[i];
-    return retorno;
 }
-
 // calcula o valor binario (truncado em 5) para o registrador
-int* registrador(char* valor)
+void registrador(char* valor, int* retorno)
 {
-    if (strcmp(valor, "$zero") == 0) return binario5(0);
+    if (strcmp(valor, "$zero") == 0) binario5(0, retorno);
 
-    else if (strcmp(valor, "$at") == 0) return binario5(1);
+    else if (strcmp(valor, "$at") == 0) binario5(1, retorno);
 
-    else if (strcmp(valor, "$v0") == 0) return binario5(2);
-    else if (strcmp(valor, "$v1") == 0) return binario5(3);
+    else if (strcmp(valor, "$v0") == 0) binario5(2, retorno);
+    else if (strcmp(valor, "$v1") == 0) binario5(3, retorno);
 
-    else if (strcmp(valor, "$a0") == 0) return binario5(4);
-    else if (strcmp(valor, "$a1") == 0) return binario5(5);
-    else if (strcmp(valor, "$a2") == 0) return binario5(6);
-    else if (strcmp(valor, "$a3") == 0) return binario5(7);
+    else if (strcmp(valor, "$a0") == 0) binario5(4, retorno);
+    else if (strcmp(valor, "$a1") == 0) binario5(5, retorno);
+    else if (strcmp(valor, "$a2") == 0) binario5(6, retorno);
+    else if (strcmp(valor, "$a3") == 0) binario5(7, retorno);
 
-    else if (strcmp(valor, "$t0") == 0) return binario5(8);
-    else if (strcmp(valor, "$t1") == 0) return binario5(9);
-    else if (strcmp(valor, "$t2") == 0) return binario5(10);
-    else if (strcmp(valor, "$t3") == 0) return binario5(11);
-    else if (strcmp(valor, "$t4") == 0) return binario5(12);
-    else if (strcmp(valor, "$t5") == 0) return binario5(13);
-    else if (strcmp(valor, "$t6") == 0) return binario5(14);
-    else if (strcmp(valor, "$t7") == 0) return binario5(15);
+    else if (strcmp(valor, "$t0") == 0) binario5(8, retorno);
+    else if (strcmp(valor, "$t1") == 0) binario5(9, retorno);
+    else if (strcmp(valor, "$t2") == 0) binario5(10, retorno);
+    else if (strcmp(valor, "$t3") == 0) binario5(11, retorno);
+    else if (strcmp(valor, "$t4") == 0) binario5(12, retorno);
+    else if (strcmp(valor, "$t5") == 0) binario5(13, retorno);
+    else if (strcmp(valor, "$t6") == 0) binario5(14, retorno);
+    else if (strcmp(valor, "$t7") == 0) binario5(15, retorno);
 
-    else if (strcmp(valor, "$s0") == 0) return binario5(16);
-    else if (strcmp(valor, "$s1") == 0) return binario5(17);
-    else if (strcmp(valor, "$s2") == 0) return binario5(18);
-    else if (strcmp(valor, "$s3") == 0) return binario5(19);
-    else if (strcmp(valor, "$s4") == 0) return binario5(20);
-    else if (strcmp(valor, "$s5") == 0) return binario5(21);
-    else if (strcmp(valor, "$s6") == 0) return binario5(22);
-    else if (strcmp(valor, "$s7") == 0) return binario5(23);
+    else if (strcmp(valor, "$s0") == 0) binario5(16, retorno);
+    else if (strcmp(valor, "$s1") == 0) binario5(17, retorno);
+    else if (strcmp(valor, "$s2") == 0) binario5(18, retorno);
+    else if (strcmp(valor, "$s3") == 0) binario5(19, retorno);
+    else if (strcmp(valor, "$s4") == 0) binario5(20, retorno);
+    else if (strcmp(valor, "$s5") == 0) binario5(21, retorno);
+    else if (strcmp(valor, "$s6") == 0) binario5(22, retorno);
+    else if (strcmp(valor, "$s7") == 0) binario5(23, retorno);
 
-    else return binario5(255);
+    else binario5(255, retorno);
 }
 
 // calcula o valor binario para a constante imediata
-int* immediate(unsigned short valor)
+void immediate(char* valor, int* retorno)
 {
-    static int retorno[16];
-    int i;
-    for(i = 15; i >= 0; i--)
-    {
-        if (valor % 2 == 0) retorno[i] = 0;
-        else retorno[i] = 1;
-        printf("I - %d: %d\n", i, retorno[i]);
+    // transforma o valor "string" em um numero (short)
+    char* pEnd;
+    unsigned short numero = (unsigned short)strtol(valor, &pEnd, 10);
 
-        valor = valor / 2;
-    }
-    return retorno;
+    // transforma o numero em string binario
+    char binarioTemp[16];
+    ltoa(numero, binarioTemp, 2);
+
+    // converte posicao a posicao a string binaria em um array de inteiro
+    int i;
+    for(i = 0; i < 16; i++) retorno[i] = binarioTemp[1] - 48;
+}
+
+// calcula o valor binario para a shift
+void shift(char* valor, int* retorno)
+{
+    int temp[16];
+    immediate(valor, temp);
+
+    int i;
+    for(i = 11; i < 16; i++) retorno[i-11] = temp[i];
 }
