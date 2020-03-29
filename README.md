@@ -4,17 +4,27 @@ Este trabalho faz parte de uma série que tem como objetivo final a construção
 
 ## Getting Started
 
-Execute o Makefile 
+Execute o Makefile.
 
 ```
 make
 ```
 
+Execute o comando abaixo com o arquivo de origem e de destino. 
+
+```
+./mips32-decode [InputFile] [OutputFile]
+```
+
+
 
 
 ## Authors
 
-* **Rafaella Matos** - [Github](https://github.com/rafaella-matos)
-* **Mariana Marcondes** - [Github](https://github.com/Marimavelar)
+* **Rafaella Gomes Nobre Maia** - [Github](https://github.com/rafaella-matos)
+* **Mariana Marcondes Avelar de Souza** - [Github](https://github.com/Marimavelar)
+* **Felipe Scur Silveira dos Reis** 
+* **João Victor Temponi Daltro de Castro** 
+* **Valnei**
 
 
