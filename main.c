@@ -13,8 +13,6 @@ int main(int argc, char* argv[])
         printf("Informe o comando a ser calculado: ");
         gets(comando);
 
-        printf("\n\nComando informado: %s", comando);
-
         Assembly c = decodificar(comando);
 
         int i;
@@ -60,10 +58,11 @@ int main(int argc, char* argv[])
         printf("Arquivo: %s\n", argv[1]);
 
         FILE *leitura = fopen(argv[1], "r");
+        FILE *gravacao = fopen(argv[2], "w+");
 
-        if (leitura == NULL)
+        if (leitura == NULL || gravacao == NULL)
         {
-            printf("Não foi possível abrir o arquivo especificado!\n");
+            printf("Não foi possível abrir os arquivos especificados!\n");
             exit(-1);
         }
 
@@ -81,10 +80,9 @@ int main(int argc, char* argv[])
             int i;
             for (i = 0; i < 32; i++)
             {
-                printf("%d", c.binario[i]);
+                fprintf(gravacao, "%d", c.binario[i]);
             }
-
-            printf("\n");
+            fprintf(gravacao, "\n");
         }
     }
 
