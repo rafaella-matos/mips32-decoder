@@ -58,7 +58,25 @@ void registrador(char* valor, int retorno[5])
     else if (strcmp(valor, "$s6") == 0) binario5(22, retorno);
     else if (strcmp(valor, "$s7") == 0) binario5(23, retorno);
 
-    else binario5(255, retorno);
+    else if (strcmp(valor, "$t8") == 0) binario5(24, retorno);
+    else if (strcmp(valor, "$t9") == 0) binario5(24, retorno);
+
+    else if (strcmp(valor, "$k0") == 0) binario5(24, retorno);
+    else if (strcmp(valor, "$k1") == 0) binario5(24, retorno);
+
+    else if (strcmp(valor, "$gp") == 0) binario5(24, retorno);
+
+    else if (strcmp(valor, "$sp") == 0) binario5(24, retorno);
+
+    else if (strcmp(valor, "$fp") == 0) binario5(24, retorno);
+
+    else if (strcmp(valor, "$ra") == 0) binario5(24, retorno);
+
+    else
+    {
+        printf("\nO registrador %s informato não é válido", valor);
+        exit(1);
+    }
 }
 
 /******************************************************************************/

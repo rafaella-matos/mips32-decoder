@@ -9,7 +9,6 @@ int main(int argc, char* argv[])
     if (argc == 1)
     {
         char comando[1000];
-        char binario[32];
         printf("Informe o comando a ser calculado: ");
         gets(comando);
 
@@ -34,7 +33,6 @@ int main(int argc, char* argv[])
         }
 
         char comando[1000];
-        char binario[32];
         while(fgets(comando, 1000, leitura) != NULL)
         {
             if (comando[strlen(comando) - 1] < 40 || comando[strlen(comando) - 1] > 122)
@@ -67,7 +65,6 @@ int main(int argc, char* argv[])
         }
 
         char comando[1000];
-        char binario[32];
         while(fgets(comando, 1000, leitura) != NULL)
         {
             if (comando[strlen(comando) - 1] < 40 || comando[strlen(comando) - 1] > 122)
