@@ -11,7 +11,7 @@
 /******************************************************************************/
 Assembly decodificar(char* linha)
 {
-    // Cria duas cÛpias: uma para verificar o comando e outra para o comando em si.
+    // Cria duas c√≥pias: uma para verificar o comando e outra para o comando em si.
     // Isso porque 'strtok' altera a string...
     char copia1[strlen(linha)];
     char copia2[strlen(linha)];
@@ -47,7 +47,7 @@ Assembly decodificar(char* linha)
 
     else
     {
-        printf("O comando informado n„o È v·lido");
+        printf("O comando informado n√£o √© v√°lido");
         Assembly retornoVazio = {};
         return retornoVazio;
     }

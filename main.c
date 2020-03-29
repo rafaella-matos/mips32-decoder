@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
 
         if (leitura == NULL)
         {
-            printf("Não foi possível abrir o arquivo especificado!\n");
+            printf("NÃƒÂ£o foi possÃƒÂ­vel abrir o arquivo especificado!\n");
             exit(-1);
         }
 
@@ -60,7 +60,7 @@ int main(int argc, char* argv[])
 
         if (leitura == NULL || gravacao == NULL)
         {
-            printf("Não foi possível abrir os arquivos especificados!\n");
+            printf("NÃ£o foi possÃ­vel abrir os arquivos especificados!\n");
             exit(-1);
         }
 
@@ -84,7 +84,7 @@ int main(int argc, char* argv[])
     }
 
 
-    // O primeiro argumento é o nome do programa
+    // O primeiro argumento ÃƒÂ© o nome do programa
     /*if (argc > 1)
     {
         // Imprime os argumentos
