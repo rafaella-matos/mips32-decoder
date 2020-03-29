@@ -2,32 +2,7 @@
 #include <stdlib.h>
 #include "apoio.h"
 
-struct Comandos comandos = {
-    { { 0, 0, 0, 0, 0, 0 }, { 1, 0, 0, 0, 0, 0 } }, // add
-    { { 0, 0, 1, 0, 0, 0 }, { } }, // addi
-    { { 0, 0, 0, 0, 0, 0 }, { 1, 0, 0, 1, 0, 0 } }, // and
-    { { 0, 0, 1, 1, 0, 0 }, { } }, // andi
-    { { 0, 0, 0, 0, 0, 0 }, { 1, 0, 0, 1, 1, 1 } }, // nor
-    { { 0, 0, 0, 0, 0, 0 }, { 1, 0, 0, 1, 0, 1 } }, // or
-    { { 0, 0, 1, 1, 0, 1 }, { } }, // ori
-    { { 0, 0, 0, 0, 0, 0 }, { 1, 0, 1, 0, 1, 0 } }, // slt
-    { { 0, 0, 1, 0, 1, 0 }, { } }, // slti
-    { { 0, 0, 0, 0, 0, 0 }, { 1, 0, 0, 0, 1, 0 } }, // sub
-    { { 0, 0, 0, 0, 0, 0 }, { 1, 0, 0, 1, 1, 0 } }, // xor
-    { { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 } }, // sll
-    { { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 1, 0 } }, // srl
-    { { 0, 0, 0, 0, 0, 0 }, { 0, 1, 1, 0, 1, 0 } }, // div
-    { { 0, 0, 0, 0, 0, 0 }, { 0, 1, 1, 0, 0, 0 } }, // mult
-    { { 0, 0, 0, 1, 0, 0 }, { } }, // beq
-    { { 0, 0, 0, 1, 0, 1 }, { } }, // bne
-    { { 0, 0, 0, 0, 1, 0 }, { } }, // j
-    { { 0, 0, 0, 0, 1, 1 }, { } }, // jal
-    { { 0, 0, 0, 0, 0, 0 }, { 0, 0, 1, 0, 0, 0 } }, // jr
-    { { 1, 0, 0, 0, 1, 1 }, { } }, // lw
-    { { 1, 0, 1, 0, 1, 1 }, { } }, // sw
-};
-
-// transforma um numero decimal em binario
+/******************************************************************************/
 void binario(int valor, int retorno[8])
 {
     int i;
@@ -40,7 +15,7 @@ void binario(int valor, int retorno[8])
     }
 }
 
-// trunca o valor binario normal para caber em 5 posicoes
+/******************************************************************************/
 void binario5(int valor, int retorno[5])
 {
     int bin[8];
@@ -49,7 +24,8 @@ void binario5(int valor, int retorno[5])
     int i;
     for(i = 3; i < 8; i++) retorno[i - 3] = bin[i];
 }
-// calcula o valor binario (truncado em 5) para o registrador
+
+/******************************************************************************/
 void registrador(char* valor, int retorno[5])
 {
     if (strcmp(valor, "$zero") == 0) binario5(0, retorno);
@@ -85,7 +61,7 @@ void registrador(char* valor, int retorno[5])
     else binario5(255, retorno);
 }
 
-// calcula o valor binario para a constante imediata
+/******************************************************************************/
 void immediate(char* valor, int retorno[16])
 {
     // transforma o valor "string" em um numero (short)
@@ -101,7 +77,7 @@ void immediate(char* valor, int retorno[16])
     for(i = 0; i < 16; i++) retorno[i] = binarioTemp[i] - 48;
 }
 
-// calcula o valor binario para a constante imediata
+/******************************************************************************/
 void jump(char* valor, int retorno[26])
 {
     // transforma o valor "string" em um numero (short)
