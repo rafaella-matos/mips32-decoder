@@ -4,7 +4,7 @@
 #include "decodificador.h"
 #include "apoio.h"
 
-// decodifica uma linha genérica
+// decodifica uma linha genï¿½rica
 assembly decodificar(char* linha)
 {
     // a
@@ -118,8 +118,6 @@ assembly _comando_j(int opcode[6], int jump[26], char* linha)
     return retorno;
 }
 
-
-
 assembly _addi(char* linha)
 {
     int length = strlen(linha) - 5;
@@ -151,7 +149,6 @@ assembly _addi(char* linha)
 
     return retorno;
 }
-
 
 assembly _andi(char* linha)
 {
@@ -217,7 +214,6 @@ assembly _ori(char* linha)
     return retorno;
 }
 
-
 assembly _slti(char* linha)
 {
     int length = strlen(linha) - 5;
@@ -249,8 +245,6 @@ assembly _slti(char* linha)
 
     return retorno;
 }
-
-
 
 assembly _beq(char* linha)
 {
@@ -341,6 +335,7 @@ assembly _j(char* linha)
 
     return retorno;
 }
+
 assembly _jal(char* linha)
 {
     int length = strlen(linha) - 4;
@@ -398,6 +393,7 @@ assembly _lw(char* linha)
 
     return retorno;
 }
+
 assembly _sw(char* linha)
 {
     int length = strlen(linha) - 3;
