@@ -9,11 +9,8 @@ int main(int argc, char* argv[])
     if (argc == 1)
     {
         char comando[1000];
-        char binario[32];
         printf("Informe o comando a ser calculado: ");
         gets(comando);
-
-        printf("\n\nComando informado: %s", comando);
 
         Assembly c = decodificar(comando);
 
@@ -31,12 +28,11 @@ int main(int argc, char* argv[])
 
         if (leitura == NULL)
         {
-            printf("Não foi possível abrir o arquivo especificado!\n");
+            printf("NÃ£o foi possÃ­vel abrir o arquivo especificado!\n");
             exit(-1);
         }
 
         char comando[1000];
-        char binario[32];
         while(fgets(comando, 1000, leitura) != NULL)
         {
             if (comando[strlen(comando) - 1] < 40 || comando[strlen(comando) - 1] > 122)
@@ -60,15 +56,15 @@ int main(int argc, char* argv[])
         printf("Arquivo: %s\n", argv[1]);
 
         FILE *leitura = fopen(argv[1], "r");
+        FILE *gravacao = fopen(argv[2], "w+");
 
-        if (leitura == NULL)
+        if (leitura == NULL || gravacao == NULL)
         {
-            printf("Não foi possível abrir o arquivo especificado!\n");
+            printf("Não foi possível abrir os arquivos especificados!\n");
             exit(-1);
         }
 
         char comando[1000];
-        char binario[32];
         while(fgets(comando, 1000, leitura) != NULL)
         {
             if (comando[strlen(comando) - 1] < 40 || comando[strlen(comando) - 1] > 122)
@@ -81,15 +77,14 @@ int main(int argc, char* argv[])
             int i;
             for (i = 0; i < 32; i++)
             {
-                printf("%d", c.binario[i]);
+                fprintf(gravacao, "%d", c.binario[i]);
             }
-
-            printf("\n");
+            fprintf(gravacao, "\n");
         }
     }
 
 
-    // O primeiro argumento é o nome do programa
+    // O primeiro argumento Ã© o nome do programa
     /*if (argc > 1)
     {
         // Imprime os argumentos

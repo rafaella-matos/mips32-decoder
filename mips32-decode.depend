@@ -18,7 +18,7 @@
 	<string.h>
 	"decodificador.h"
 
-1585496868 source:c:\dev\rafa\mips32-decoder\apoio.c
+1585523168 source:c:\dev\rafa\mips32-decoder\apoio.c
 	<string.h>
 	<stdlib.h>
 	"apoio.h"
@@ -26,14 +26,14 @@
 1585495740 c:\dev\rafa\mips32-decoder\apoio.h
 	"tipos_comuns.h"
 
-1585511332 source:c:\dev\rafa\mips32-decoder\main.c
+1585523186 source:c:\dev\rafa\mips32-decoder\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"decodificador.h"
 	"tipos_comuns.h"
 
-1585496125 c:\dev\rafa\mips32-decoder\decodificador.h
+1585522702 c:\dev\rafa\mips32-decoder\decodificador.h
 	"tipos_comuns.h"
 
 1585511340 source:c:\dev\rafa\mips32-decoder\decodificador.c
@@ -49,13 +49,13 @@
 
 1585510305 c:\dev\rafa\mips32-decoder\tipos_comuns.h
 
-1585510304 c:\dev\rafa\mips32-decoder\decodificador_r.h
+1585522887 c:\dev\rafa\mips32-decoder\decodificador_r.h
 	"tipos_comuns.h"
 
-1585510304 c:\dev\rafa\mips32-decoder\decodificador_i.h
+1585522927 c:\dev\rafa\mips32-decoder\decodificador_i.h
 	"tipos_comuns.h"
 
-1585510304 c:\dev\rafa\mips32-decoder\decodificador_j.h
+1585522895 c:\dev\rafa\mips32-decoder\decodificador_j.h
 	"tipos_comuns.h"
 
 1585510282 source:c:\dev\rafa\mips32-decoder\decodificador_j.c
@@ -70,7 +70,7 @@
 	<string.h>
 	<stdio.h>
 
-1585510343 source:c:\dev\rafa\mips32-decoder\decodificador_r.c
+1585511430 source:c:\dev\rafa\mips32-decoder\decodificador_r.c
 	"tipos_comuns.h"
 	"apoio.h"
 	<string.h>
