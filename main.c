@@ -4,9 +4,108 @@
 #include "decodificador.h"
 #include "tipos_comuns.h"
 
-int main()
+int main(int argc, char* argv[])
 {
-    decodificar("add $t0,$t2,$t3");
+    if (argc == 1)
+    {
+        char comando[1000];
+        char binario[32];
+        printf("Informe o comando a ser calculado: ");
+        gets(comando);
+
+        printf("\n\nComando informado: %s", comando);
+
+        Assembly c = decodificar(comando);
+
+        int i;
+        for (i = 0; i < 32; i++)
+        {
+            printf("%d", c.binario[i]);
+        }
+    }
+    else if (argc == 2)
+    {
+        printf("Arquivo: %s\n", argv[1]);
+
+        FILE *leitura = fopen(argv[1], "r");
+
+        if (leitura == NULL)
+        {
+            printf("Não foi possível abrir o arquivo especificado!\n");
+            exit(-1);
+        }
+
+        char comando[1000];
+        char binario[32];
+        while(fgets(comando, 1000, leitura) != NULL)
+        {
+            if (comando[strlen(comando) - 1] < 40 || comando[strlen(comando) - 1] > 122)
+            {
+                comando[strlen(comando) - 1] = '\0';
+            }
+
+            Assembly c = decodificar(comando);
+
+            int i;
+            for (i = 0; i < 32; i++)
+            {
+                printf("%d", c.binario[i]);
+            }
+
+            printf("\n");
+        }
+    }
+    else if (argc == 3)
+    {
+        printf("Arquivo: %s\n", argv[1]);
+
+        FILE *leitura = fopen(argv[1], "r");
+
+        if (leitura == NULL)
+        {
+            printf("Não foi possível abrir o arquivo especificado!\n");
+            exit(-1);
+        }
+
+        char comando[1000];
+        char binario[32];
+        while(fgets(comando, 1000, leitura) != NULL)
+        {
+            if (comando[strlen(comando) - 1] < 40 || comando[strlen(comando) - 1] > 122)
+            {
+                comando[strlen(comando) - 1] = '\0';
+            }
+
+            Assembly c = decodificar(comando);
+
+            int i;
+            for (i = 0; i < 32; i++)
+            {
+                printf("%d", c.binario[i]);
+            }
+
+            printf("\n");
+        }
+    }
+
+
+    // O primeiro argumento é o nome do programa
+    /*if (argc > 1)
+    {
+        // Imprime os argumentos
+        for(int i = 1; i < argc; i++)
+        {
+            if (argc == 3)
+            {
+                existeArquivoSaida = true;
+            }
+
+            printf("Argumento: %s\n", argv[i]);
+        }
+    }*/
+
+
+    /*decodificar("add $t0,$t2,$t3");
     printf("\n");
     decodificar("addi $t1,$t4,65535");
     printf("\n");
@@ -49,6 +148,6 @@ int main()
     decodificar("lw $t2,65535($t0)");
     printf("\n");
     decodificar("sw $t2,65535($t0)");
-    printf("\n");
+    printf("\n");*/
     return 0;
 }

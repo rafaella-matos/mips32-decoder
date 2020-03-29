@@ -11,8 +11,6 @@
 /******************************************************************************/
 Assembly decodificar(char* linha)
 {
-    printf("Linha: %s", linha);
-
     // Cria duas cópias: uma para verificar o comando e outra para o comando em si.
     // Isso porque 'strtok' altera a string...
     char copia1[strlen(linha)];

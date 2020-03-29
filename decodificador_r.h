@@ -3,7 +3,7 @@
 #ifndef DECODIFICADOR_R_H_INCLUDED
 #define DECODIFICADOR_R_H_INCLUDED
 
-Assembly _comando_r(int opcode[6], int shamt[5], int funct[6], int rd[5], int rs[5], int rt[5], char* linha);
+Assembly _comando_r(int opcode[6], int shamt[5], int funct[6], int rd[5], int rs[5], int rt[5]);
 Assembly _add(char* linha);
 Assembly _and(char* linha);
 Assembly _nor(char* linha);

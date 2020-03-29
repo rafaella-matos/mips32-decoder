@@ -3,11 +3,10 @@
 #include <string.h>
 #include <stdio.h>
 
-Assembly _comando_j(int opcode[6], int jump[26], char* linha)
+Assembly _comando_j(int opcode[6], int jump[26])
 {
     Assembly retorno;
     retorno.tipo = 'J';
-    retorno.linha = linha;
 
     int padding = 0;
     int i = 0;
@@ -39,11 +38,10 @@ Assembly _j(char* linha)
     token[strlen(token) - 1] = '\0';
     jump(token, target);
 
-    Assembly retorno = _comando_j(comandos.j.opcode, target, linha);
+    Assembly retorno = _comando_j(comandos.j.opcode, target);
 
     // log - debug
     printf("\n\n--------------\n");
-    printf("%s\n", linha);
     for(i = 0; i < 32; i++)
         printf("%d", retorno.binario[i]);
     printf("\n--------------\n\n");
@@ -62,11 +60,10 @@ Assembly _jal(char* linha)
     token[strlen(token) - 1] = '\0';
     jump(token, target);
 
-    Assembly retorno = _comando_j(comandos.jal.opcode, target, linha);
+    Assembly retorno = _comando_j(comandos.jal.opcode, target);
 
     // log - debug
     printf("\n\n--------------\n");
-    printf("%s\n", linha);
     for(i = 0; i < 32; i++)
         printf("%d", retorno.binario[i]);
     printf("\n--------------\n\n");

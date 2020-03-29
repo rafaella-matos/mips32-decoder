@@ -2,7 +2,6 @@
 #define TIPOS_COMUNS_H_INCLUDED
 
 typedef struct {
-    char* linha;
     char tipo;
     int binario[32];
 } Assembly;
@@ -68,7 +67,5 @@ static Comandos comandos = {
     { "lw",     { 1, 0, 0, 0, 1, 1 },   { }                     }, // lw
     { "sw",     { 1, 0, 1, 0, 1, 1 },   { }                     }, // sw
     };
-
-static Comandos comandos;
 
 #endif // TIPOS_COMUNS_H_INCLUDED

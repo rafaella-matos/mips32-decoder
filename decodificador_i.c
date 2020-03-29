@@ -3,11 +3,10 @@
 #include <string.h>
 #include <stdio.h>
 
-Assembly _comando_i(int opcode[6], int funct[6], int rs[5], int rt[5], int imm[16], char* linha)
+Assembly _comando_i(int opcode[6], int funct[6], int rs[5], int rt[5], int imm[16])
 {
     Assembly retorno;
     retorno.tipo = 'I';
-    retorno.linha = linha;
 
     int padding = 0;
     int i = 0;
@@ -53,11 +52,10 @@ Assembly _addi(char* linha)
     int imm[16];
     immediate(strtok(NULL, ","), imm);
 
-    Assembly retorno = _comando_i(comandos.addi.opcode, comandos.addi.funct, rs, rt, imm, linha);
+    Assembly retorno = _comando_i(comandos.addi.opcode, comandos.addi.funct, rs, rt, imm);
 
     // log - debug
     printf("\n\n--------------\n");
-    printf("%s\n", linha);
     for(i = 0; i < 32; i++)
         printf("%d", retorno.binario[i]);
     printf("\n--------------\n\n");
@@ -80,11 +78,10 @@ Assembly _andi(char* linha)
     int imm[5];
     immediate(strtok(NULL, ","), imm);
 
-    Assembly retorno = _comando_i(comandos.andi.opcode, comandos.andi.funct, rs, rt, imm, linha);
+    Assembly retorno = _comando_i(comandos.andi.opcode, comandos.andi.funct, rs, rt, imm);
 
     // log - debug
     printf("\n\n--------------\n");
-    printf("%s\n", linha);
     for(i = 0; i < 32; i++)
         printf("%d", retorno.binario[i]);
     printf("\n--------------\n\n");
@@ -107,11 +104,10 @@ Assembly _ori(char* linha)
     int imm[16];
     immediate(strtok(NULL, ","), imm);
 
-    Assembly retorno = _comando_i(comandos.ori.opcode, comandos.ori.funct, rs, rt, imm, linha);
+    Assembly retorno = _comando_i(comandos.ori.opcode, comandos.ori.funct, rs, rt, imm);
 
     // log - debug
     printf("\n\n--------------\n");
-    printf("%s\n", linha);
     for(i = 0; i < 32; i++)
         printf("%d", retorno.binario[i]);
     printf("\n--------------\n\n");
@@ -134,11 +130,10 @@ Assembly _slti(char* linha)
     int imm[16];
     immediate(strtok(NULL, ","), imm);
 
-    Assembly retorno = _comando_i(comandos.slti.opcode, comandos.slti.funct, rs, rt, imm, linha);
+    Assembly retorno = _comando_i(comandos.slti.opcode, comandos.slti.funct, rs, rt, imm);
 
     // log - debug
     printf("\n\n--------------\n");
-    printf("%s\n", linha);
     for(i = 0; i < 32; i++)
         printf("%d", retorno.binario[i]);
     printf("\n--------------\n\n");
@@ -163,11 +158,10 @@ Assembly _beq(char* linha)
 
 
 
-    Assembly retorno = _comando_i(comandos.beq.opcode, comandos.beq.funct, rs, rt, imm, linha);
+    Assembly retorno = _comando_i(comandos.beq.opcode, comandos.beq.funct, rs, rt, imm);
 
     // log - debug
     printf("\n\n--------------\n");
-    printf("%s\n", linha);
     for(i = 0; i < 32; i++)
         printf("%d", retorno.binario[i]);
     printf("\n--------------\n\n");
@@ -190,11 +184,10 @@ Assembly _bne(char* linha)
     int imm[16];
     immediate(strtok(NULL, ","), imm);
 
-    Assembly retorno = _comando_i(comandos.bne.opcode, comandos.bne.funct, rs, rt, imm, linha);
+    Assembly retorno = _comando_i(comandos.bne.opcode, comandos.bne.funct, rs, rt, imm);
 
     // log - debug
     printf("\n\n--------------\n");
-    printf("%s\n", linha);
     for(i = 0; i < 32; i++)
         printf("%d", retorno.binario[i]);
     printf("\n--------------\n\n");
@@ -219,11 +212,10 @@ Assembly _lw(char* linha)
     int rs[5];
     registrador(strtok(NULL, ")"), rs);
 
-    Assembly retorno = _comando_i(comandos.lw.opcode, comandos.lw.funct, rs, rt, offset, linha);
+    Assembly retorno = _comando_i(comandos.lw.opcode, comandos.lw.funct, rs, rt, offset);
 
     // log - debug
     printf("\n\n--------------\n");
-    printf("%s\n", linha);
     for(i = 0; i < 32; i++)
         printf("%d", retorno.binario[i]);
     printf("\n--------------\n\n");
@@ -246,11 +238,10 @@ Assembly _sw(char* linha)
     int rs[5];
     registrador(strtok(NULL, ")"), rs);
 
-    Assembly retorno = _comando_i(comandos.sw.opcode, comandos.sw.funct, rs, rt, offset, linha);
+    Assembly retorno = _comando_i(comandos.sw.opcode, comandos.sw.funct, rs, rt, offset);
 
     // log - debug
     printf("\n\n--------------\n");
-    printf("%s\n", linha);
     for(i = 0; i < 32; i++)
         printf("%d", retorno.binario[i]);
     printf("\n--------------\n\n");
