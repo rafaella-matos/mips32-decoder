@@ -39,6 +39,14 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="decodificador.h" />
+		<Unit filename="decodificador_i.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="decodificador_i.h" />
+		<Unit filename="decodificador_j.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="decodificador_j.h" />
 		<Unit filename="decodificador_r.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -46,6 +54,7 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="tipos_comuns.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

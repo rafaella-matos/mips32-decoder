@@ -1,8 +1,12 @@
-#include "decodificador_r.h"
+#include "tipos_comuns.h"
+#include "apoio.h"
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-assembly _comando_r(int opcode[6], int shamt[5], int funct[6], int rd[5], int rs[5], int rt[5], char* linha)
+Assembly _comando_r(int opcode[6], int shamt[5], int funct[6], int rd[5], int rs[5], int rt[5], char* linha)
 {
-    assembly retorno;
+    Assembly retorno;
     retorno.tipo = 'R';
     retorno.linha = linha;
 
@@ -44,19 +48,12 @@ assembly _comando_r(int opcode[6], int shamt[5], int funct[6], int rd[5], int rs
     return retorno;
 }
 
-assembly _add(char* linha)
+Assembly _add(char* linha)
 {
-    int length = strlen(linha) - 4;
-    char temp[length + 1];
-    int i;
-    for(i = 0; i < length; i++)
-    {
-        temp[i] = linha[i + 4];
-    }
-    temp[length] = 0;
+    strtok(linha, " ");
 
     int rd[5];
-    registrador(strtok(temp, ","), rd);
+    registrador(strtok(NULL, ","), rd);
 
     int rs[5];
     registrador(strtok(NULL, ","), rs);
@@ -66,7 +63,36 @@ assembly _add(char* linha)
 
     int shamt[5] = { 0, 0, 0, 0, 0 };
 
-    assembly retorno = _comando_r(comandos.add.opcode, shamt, comandos.add.funct, rd, rs, rt, linha);
+    printf("\npreparando\n");
+    Assembly retorno = _comando_r(comandos.add.opcode, shamt, comandos.add.funct, rd, rs, rt, linha);
+
+    int i;
+    // log - debug
+    printf("\n\n--------------\n");
+    printf("%s\n", linha);
+    for(i = 0; i < 32; i++) printf("%d", retorno.binario[i]);
+    printf("\n--------------\n\n");
+
+    return retorno;
+}
+
+Assembly _and(char* linha)
+{
+    strtok(linha, " ");
+    int i;
+
+    int rd[5];
+    registrador(strtok(NULL, ","), rd);
+
+    int rs[5];
+    registrador(strtok(NULL, ","), rs);
+
+    int rt[5];
+    registrador(strtok(NULL, ","), rt);
+
+    int shamt[5] = { 0, 0, 0, 0, 0 };
+
+    Assembly retorno = _comando_r(comandos.and.opcode, shamt, comandos.and.funct, rd, rs, rt, linha);
 
     // log - debug
     printf("\n\n--------------\n");
@@ -77,19 +103,13 @@ assembly _add(char* linha)
     return retorno;
 }
 
-assembly _and(char* linha)
+Assembly _nor(char* linha)
 {
-    int length = strlen(linha) - 4;
-    char temp[length + 1];
+    strtok(linha, " ");
     int i;
-    for(i = 0; i < length; i++)
-    {
-        temp[i] = linha[i + 4];
-    }
-    temp[length] = 0;
 
     int rd[5];
-    registrador(strtok(temp, ","), rd);
+    registrador(strtok(NULL, ","), rd);
 
     int rs[5];
     registrador(strtok(NULL, ","), rs);
@@ -99,7 +119,7 @@ assembly _and(char* linha)
 
     int shamt[5] = { 0, 0, 0, 0, 0 };
 
-    assembly retorno = _comando_r(comandos.and.opcode, shamt, comandos.and.funct, rd, rs, rt, linha);
+    Assembly retorno = _comando_r(comandos.nor.opcode, shamt, comandos.nor.funct, rd, rs, rt, linha);
 
     // log - debug
     printf("\n\n--------------\n");
@@ -110,19 +130,13 @@ assembly _and(char* linha)
     return retorno;
 }
 
-assembly _nor(char* linha)
+Assembly _or(char* linha)
 {
-    int length = strlen(linha) - 4;
-    char temp[length + 1];
+    strtok(linha, " ");
     int i;
-    for(i = 0; i < length; i++)
-    {
-        temp[i] = linha[i + 4];
-    }
-    temp[length] = 0;
 
     int rd[5];
-    registrador(strtok(temp, ","), rd);
+    registrador(strtok(NULL, ","), rd);
 
     int rs[5];
     registrador(strtok(NULL, ","), rs);
@@ -132,7 +146,7 @@ assembly _nor(char* linha)
 
     int shamt[5] = { 0, 0, 0, 0, 0 };
 
-    assembly retorno = _comando_r(comandos.nor.opcode, shamt, comandos.nor.funct, rd, rs, rt, linha);
+    Assembly retorno = _comando_r(comandos.or.opcode, shamt, comandos.or.funct, rd, rs, rt, linha);
 
     // log - debug
     printf("\n\n--------------\n");
@@ -143,19 +157,13 @@ assembly _nor(char* linha)
     return retorno;
 }
 
-assembly _or(char* linha)
+Assembly _slt(char* linha)
 {
-    int length = strlen(linha) - 3;
-    char temp[length + 1];
+    strtok(linha, " ");
     int i;
-    for(i = 0; i < length; i++)
-    {
-        temp[i] = linha[i + 3];
-    }
-    temp[length] = 0;
 
     int rd[5];
-    registrador(strtok(temp, ","), rd);
+    registrador(strtok(NULL, ","), rd);
 
     int rs[5];
     registrador(strtok(NULL, ","), rs);
@@ -165,7 +173,33 @@ assembly _or(char* linha)
 
     int shamt[5] = { 0, 0, 0, 0, 0 };
 
-    assembly retorno = _comando_r(comandos.or.opcode, shamt, comandos.or.funct, rd, rs, rt, linha);
+    Assembly retorno = _comando_r(comandos.slt.opcode, shamt, comandos.slt.funct, rd, rs, rt, linha);
+
+    // log - debug
+    printf("\n\n--------------\n");
+    printf("%s\n", linha);
+    for(i = 0; i < 32; i++) printf("%d", retorno.binario[i]);
+    printf("\n--------------\n\n");
+
+    return retorno;
+}
+Assembly _sub(char* linha)
+{
+    strtok(linha, " ");
+    int i;
+
+    int rd[5];
+    registrador(strtok(NULL, ","), rd);
+
+    int rs[5];
+    registrador(strtok(NULL, ","), rs);
+
+    int rt[5];
+    registrador(strtok(NULL, ","), rt);
+
+    int shamt[5] = { 0, 0, 0, 0, 0 };
+
+    Assembly retorno = _comando_r(comandos.sub.opcode, shamt, comandos.sub.funct, rd, rs, rt, linha);
 
     // log - debug
     printf("\n\n--------------\n");
@@ -176,19 +210,13 @@ assembly _or(char* linha)
     return retorno;
 }
 
-assembly _slt(char* linha)
+Assembly _xor(char* linha)
 {
-    int length = strlen(linha) - 4;
-    char temp[length + 1];
+    strtok(linha, " ");
     int i;
-    for(i = 0; i < length; i++)
-    {
-        temp[i] = linha[i + 4];
-    }
-    temp[length] = 0;
 
     int rd[5];
-    registrador(strtok(temp, ","), rd);
+    registrador(strtok(NULL, ","), rd);
 
     int rs[5];
     registrador(strtok(NULL, ","), rs);
@@ -198,39 +226,7 @@ assembly _slt(char* linha)
 
     int shamt[5] = { 0, 0, 0, 0, 0 };
 
-    assembly retorno = _comando_r(comandos.slt.opcode, shamt, comandos.slt.funct, rd, rs, rt, linha);
-
-    // log - debug
-    printf("\n\n--------------\n");
-    printf("%s\n", linha);
-    for(i = 0; i < 32; i++) printf("%d", retorno.binario[i]);
-    printf("\n--------------\n\n");
-
-    return retorno;
-}
-assembly _sub(char* linha)
-{
-    int length = strlen(linha) - 4;
-    char temp[length + 1];
-    int i;
-    for(i = 0; i < length; i++)
-    {
-        temp[i] = linha[i + 4];
-    }
-    temp[length] = 0;
-
-    int rd[5];
-    registrador(strtok(temp, ","), rd);
-
-    int rs[5];
-    registrador(strtok(NULL, ","), rs);
-
-    int rt[5];
-    registrador(strtok(NULL, ","), rt);
-
-    int shamt[5] = { 0, 0, 0, 0, 0 };
-
-    assembly retorno = _comando_r(comandos.sub.opcode, shamt, comandos.sub.funct, rd, rs, rt, linha);
+    Assembly retorno = _comando_r(comandos.xor.opcode, shamt, comandos.xor.funct, rd, rs, rt, linha);
 
     // log - debug
     printf("\n\n--------------\n");
@@ -241,54 +237,15 @@ assembly _sub(char* linha)
     return retorno;
 }
 
-assembly _xor(char* linha)
+Assembly _sll(char* linha)
 {
-    int length = strlen(linha) - 4;
-    char temp[length + 1];
+    strtok(linha, " ");
     int i;
-    for(i = 0; i < length; i++)
-    {
-        temp[i] = linha[i + 4];
-    }
-    temp[length] = 0;
-
-    int rd[5];
-    registrador(strtok(temp, ","), rd);
-
-    int rs[5];
-    registrador(strtok(NULL, ","), rs);
-
-    int rt[5];
-    registrador(strtok(NULL, ","), rt);
-
-    int shamt[5] = { 0, 0, 0, 0, 0 };
-
-    assembly retorno = _comando_r(comandos.xor.opcode, shamt, comandos.xor.funct, rd, rs, rt, linha);
-
-    // log - debug
-    printf("\n\n--------------\n");
-    printf("%s\n", linha);
-    for(i = 0; i < 32; i++) printf("%d", retorno.binario[i]);
-    printf("\n--------------\n\n");
-
-    return retorno;
-}
-
-assembly _sll(char* linha)
-{
-    int length = strlen(linha) - 4;
-    char temp[length + 1];
-    int i;
-    for(i = 0; i < length; i++)
-    {
-        temp[i] = linha[i + 4];
-    }
-    temp[length] = 0;
 
     int rs[5] = { 0, 0, 0, 0, 0 };
 
     int rd[5];
-    registrador(strtok(temp, ","), rd);
+    registrador(strtok(NULL, ","), rd);
 
     int rt[5];
     registrador(strtok(NULL, ","), rt);
@@ -296,7 +253,7 @@ assembly _sll(char* linha)
     int sa[5];
     binario5(atoi(strtok(NULL, ",")), sa);
 
-    assembly retorno = _comando_r(comandos.sll.opcode, sa, comandos.sll.funct, rd, rs, rt, linha);
+    Assembly retorno = _comando_r(comandos.sll.opcode, sa, comandos.sll.funct, rd, rs, rt, linha);
 
     // log - debug
     printf("\n\n--------------\n");
@@ -306,21 +263,15 @@ assembly _sll(char* linha)
 
     return retorno;
 }
-assembly _srl(char* linha)
+Assembly _srl(char* linha)
 {
-    int length = strlen(linha) - 4;
-    char temp[length + 1];
+    strtok(linha, " ");
     int i;
-    for(i = 0; i < length; i++)
-    {
-        temp[i] = linha[i + 4];
-    }
-    temp[length] = 0;
 
     int rs[5] = { 0, 0, 0, 0, 0 };
 
     int rd[5];
-    registrador(strtok(temp, ","), rd);
+    registrador(strtok(NULL, ","), rd);
 
     int rt[5];
     registrador(strtok(NULL, ","), rt);
@@ -328,7 +279,7 @@ assembly _srl(char* linha)
     int sa[5];
     binario5(atoi(strtok(NULL, ",")), sa);
 
-    assembly retorno = _comando_r(comandos.srl.opcode, sa, comandos.srl.funct, rd, rs, rt, linha);
+    Assembly retorno = _comando_r(comandos.srl.opcode, sa, comandos.srl.funct, rd, rs, rt, linha);
 
     // log - debug
     printf("\n\n--------------\n");
@@ -339,93 +290,73 @@ assembly _srl(char* linha)
     return retorno;
 }
 
-assembly _div(char* linha)
+Assembly _div(char* linha)
 {
-    int length = strlen(linha) - 4;
-    char temp[length + 1];
+    strtok(linha, " ");
     int i;
-    for(i = 0; i < length; i++)
-    {
-        temp[i] = linha[i + 4];
-    }
-    temp[length] = 0;
-
-    int rd[5];
-    registrador(strtok(temp, ","), rd);
-
-    int rs[5];
-    registrador(strtok(NULL, ","), rs);
-
-    int rt[5];
-    registrador(strtok(NULL, ","), rt);
-
-    int shamt[10] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-
-    assembly retorno = _comando_r(comandos.div.opcode, shamt, comandos.div.funct, rd, rs, rt, linha);
-
-    // log - debug
-    printf("\n\n--------------\n");
-    printf("%s\n", linha);
-    for(i = 0; i < 32; i++) printf("%d", retorno.binario[i]);
-    printf("\n--------------\n\n");
-
-    return retorno;
-}
-
-assembly _mult(char* linha)
-{
-    int length = strlen(linha) - 5;
-    char temp[length + 1];
-    int i;
-    for(i = 0; i < length; i++)
-    {
-        temp[i] = linha[i + 5];
-    }
-    temp[length] = 0;
-
-    int rd[5];
-    registrador(strtok(temp, ","), rd);
-
-    int rs[5];
-    registrador(strtok(NULL, ","), rs);
-
-    int rt[5];
-    registrador(strtok(NULL, ","), rt);
-
-    int shamt[10] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-
-    assembly retorno = _comando_r(comandos.div.opcode, shamt, comandos.div.funct, rd, rs, rt, linha);
-
-    // log - debug
-    printf("\n\n--------------\n");
-    printf("%s\n", linha);
-    for(i = 0; i < 32; i++) printf("%d", retorno.binario[i]);
-    printf("\n--------------\n\n");
-
-    return retorno;
-}
-
-assembly _jr(char* linha)
-{
-    int length = strlen(linha) - 3;
-    char temp[length + 1];
-    int i;
-    for(i = 0; i < length; i++)
-    {
-        temp[i] = linha[i + 3];
-    }
-    temp[length] = 0;
 
     int rd[5] = { 0, 0, 0, 0, 0 };
 
     int rs[5];
-    registrador(temp, rs);
+    registrador(strtok(NULL, ","), rs);
+
+    int rt[5];
+    registrador(strtok(NULL, ","), rt);
+
+    int shamt[10] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+    Assembly retorno = _comando_r(comandos.div.opcode, shamt, comandos.div.funct, rd, rs, rt, linha);
+
+    // log - debug
+    printf("\n\n--------------\n");
+    printf("%s\n", linha);
+    for(i = 0; i < 32; i++) printf("%d", retorno.binario[i]);
+    printf("\n--------------\n\n");
+
+    return retorno;
+}
+
+Assembly _mult(char* linha)
+{
+    strtok(linha, " ");
+    int i;
+
+    int rd[5] = { 0, 0, 0, 0, 0 };
+
+    int rs[5];
+    registrador(strtok(NULL, ","), rs);
+
+    int rt[5];
+    registrador(strtok(NULL, ","), rt);
+
+    int shamt[10] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+    Assembly retorno = _comando_r(comandos.div.opcode, shamt, comandos.div.funct, rd, rs, rt, linha);
+
+    // log - debug
+    printf("\n\n--------------\n");
+    printf("%s\n", linha);
+    for(i = 0; i < 32; i++) printf("%d", retorno.binario[i]);
+    printf("\n--------------\n\n");
+
+    return retorno;
+}
+
+Assembly _jr(char* linha)
+{
+    strtok(linha, " ");
+    int i;
+
+    int rd[5] = { 0, 0, 0, 0, 0 };
+
+    int rs[5];
+    registrador(linha, rs);
 
     int rt[5] = { 0, 0, 0, 0, 0 };
 
     int shamt[10] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-    assembly retorno = _comando_r(comandos.jr.opcode, shamt, comandos.jr.funct, rd, rs, rt, linha);
+    Assembly retorno = _comando_r(comandos.jr.opcode, shamt, comandos.jr.funct, rd, rs, rt, linha);
 
     // log - debug
     printf("\n\n--------------\n");

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "decodificador.h"
+#include "tipos_comuns.h"
 
 int main()
 {

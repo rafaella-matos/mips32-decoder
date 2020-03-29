@@ -1,50 +1,46 @@
+#include "tipos_comuns.h"
+
 #ifndef APOIO_H_INCLUDED
 #define APOIO_H_INCLUDED
 
-typedef struct {
-    int opcode[6];
-    int funct[6];
-} comando;
-
-struct Comandos {
-    comando add   ;
-    comando addi  ;
-    comando and   ;
-    comando andi  ;
-    comando nor   ;
-    comando or    ;
-    comando ori   ;
-    comando slt   ;
-    comando slti  ;
-    comando sub   ;
-    comando xor   ;
-    comando sll   ;
-    comando srl   ;
-    comando div   ;
-    comando mult  ;
-    comando beq   ;
-    comando bne   ;
-    comando j     ;
-    comando jal   ;
-    comando jr    ;
-    comando lw    ;
-    comando sw    ;
-};
-struct Comandos comandos;
-
-// transforma um numero decimal em binario
+/***************************************************************************
+ * Transforma um numero inteiro em binário
+ *
+ * @param valor O valor inteiro para conversão
+ * @param vetor O vetor para receber a representação
+ ***************************************************************************/
 void binario(int valor, int vetor[8]);
 
-// trunca o valor binario normal para caber em 5 posicoes
+/***************************************************************************
+ * Transforma um número inteiro em binário truncado em 5 posições
+ *
+ * @param valor O valor inteiro para conversão
+ * @param vetor O vetor para receber a representação
+ ***************************************************************************/
 void binario5(int valor, int vetor[5]);
 
-// calcula o valor binario (truncado em 5) para o registrador
+/***************************************************************************
+ * Obtém a representação em binário para o valor literal de um registrador
+ *
+ * @param valor O valor literal (string) do registrador
+ * @param vetor O vetor para receber a representação
+ ***************************************************************************/
 void registrador(char* valor, int vetor[5]);
 
-// calcula o valor binario para a constante imediata
+/***************************************************************************
+ * Obtém a representação em binário para o valor imediato
+ *
+ * @param valor O valor literal (string) para conversão
+ * @param vetor O vetor para receber a representação
+ ***************************************************************************/
 void immediate(char* valor, int vetor[16]);
 
-// calcula o valor binario para a constante imediata
+/***************************************************************************
+ * Obtém a representação em binário para o valor de pulo
+ *
+ * @param valor O valor literal (string) para conversão
+ * @param vetor O vetor para receber a representação
+ ***************************************************************************/
 void jump(char* valor, int vetor[26]);
 
 #endif // APOIO_H_INCLUDED
